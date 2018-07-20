@@ -1,0 +1,44 @@
+<!-- landing page -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h1>scrapify</h1>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="row justify-content-center">
+        {{#each articles}}
+        <div class="col-md-10">
+
+                <h2>{{this.title}}</h2>
+                <a href="{{this.link}}">link to article</a>
+                <p>{{this.summary}}</p>
+
+                <div id="article-comments">
+                    <!-- generate the user comments here -->
+                </div>
+
+                <!-- comment button for each article -->
+                <form action="article/comment/create/{{this._id}}" method="POST">
+                    <input type="text" name="body">
+                    <button class="btn btn-sm btn-success add-saved-btn save">save article</button>
+                </form>
+
+                <button class="show-comments-btn" data-id="{{this._id}}">show comments</button>
+
+                <div id="comments-div">
+                    <!-- generate user comments here -->
+                </div>
+
+        </div>
+        {{/each}}
+    </div>
+
+
+
+
+</div>
