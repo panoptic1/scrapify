@@ -126,6 +126,10 @@ app.get("/articles/:id", function(req, res) {
     });
 });
 
+/*app.post("/articles/comment/create/:id", function(){
+
+});*/
+
 app.listen(PORT, function(){
     console.log("Listening on port: " + PORT)
 });
