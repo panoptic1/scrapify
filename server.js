@@ -35,12 +35,19 @@ app.set("view engine", "handlebars");
 //app.use(router);
 
 // If deployed, use the deployed database. Otherwise use the local mongoheadlines
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoheadlines";
+var databaseUri = process.env.MONGODB_URI || "mongodb://localhost/mongoheadlines";
+
+//connect to heroku db
+if (process.env.MONGODB_URI) {
+    //Fire this if heroku is active
+    mongoose.connect(process.env.MONGODB_URI);
+} else {
+    //Connect on local environment
+    mongoose.connect(databaseUri);
+}
 
 // Set mongoose to leverage built in JavaScript ES6 Promises
-// Connect to the Mongo DB
 mongoose.Promise = Promise;
-mongoose.connect(MONGODB_URI);
 
 //Create a shorthand app for the mongoose connection
 const db = mongoose.connection
@@ -61,6 +68,7 @@ const models = require("./models/index")
 //================================ROUTES===================================
 
 app.get("/scrape", function(req, res) {
+
 
     axios.get("https://www.nytimes.com").then(function(response) {
         
